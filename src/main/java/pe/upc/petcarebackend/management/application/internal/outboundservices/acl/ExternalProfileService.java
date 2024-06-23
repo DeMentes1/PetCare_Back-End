@@ -1,7 +1,7 @@
 package pe.upc.petcarebackend.management.application.internal.outboundservices.acl;
 
 import org.springframework.stereotype.Service;
-import pe.upc.petcarebackend.profile.interfaces.acl.ProfilesContextFacade;
+import pe.upc.petcarebackend.users.interfaces.acl.ProfilesContextFacade;
 import pe.upc.petcarebackend.management.domain.model.valueobjects.ProfileId;
 
 import java.util.Optional;

@@ -2,7 +2,6 @@ version: '3.8'
 
 services:
   app:
-    image: "docker-springboot-pg-petcare:latest"
     build:
       context: .
     container_name: app

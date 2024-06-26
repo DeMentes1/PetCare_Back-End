@@ -1,25 +1,22 @@
-services:
-  app:
-    build:
-      context: .
-    container_name: app
-    depends_on:
-      - db
-    environment:
-      - POSTGRES_USER=root
-      - POSTGRES_PASSWORD=root
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/petcare?useSSL=false&serverTimezone=UTC
-      - SPRING_DATASOURCE_USERNAME=root
-      - SPRING_DATASOURCE_PASSWORD=root
-    ports:
-      - "80:8080"
+nginx-ssl-proxy:
 
-  db:
-    image: postgres
-    container_name: db
-    environment:
-      - POSTGRES_USER=root
-      - POSTGRES_PASSWORD=root
-      - POSTGRES_DB=petcare
-    ports:
-      - "5432:5432"
+  image: danieldent/nginx-ssl-proxy
+
+  restart: always
+
+  environment:
+
+    UPSTREAM: 127.0.0.1:8080
+
+    SERVERNAME: test.example.com
+
+    EXTRANAMES: test.example.com,test2.example.com
+
+  ports:
+
+    - "80:80"
+    - "443:443"
+
+  volumes:
+
+    - "/etc/letsencrypt"

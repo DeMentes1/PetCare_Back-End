@@ -1,6 +1,7 @@
 package pe.upc.petcarebackend.shared.domain.model.aggregates;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -11,12 +12,14 @@ import java.util.Date;
 
 @EntityListeners(AuditingEntityListener.class)
 @MappedSuperclass
-public abstract class AuditableAbstractAggregateRoot <T extends AbstractAggregateRoot<T>> extends AbstractAggregateRoot<T> {
+public abstract class AuditableAbstractAggregateRoot<T extends AbstractAggregateRoot<T>> extends AbstractAggregateRoot<T> {
+
     @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
 
+    /*
     @Getter
     @CreatedDate
     @Column(nullable = false, updatable = false)
@@ -26,5 +29,5 @@ public abstract class AuditableAbstractAggregateRoot <T extends AbstractAggregat
     @LastModifiedDate
     @Column(nullable = false)
     private Date updatedAt;
-
+*/
 }

@@ -4,15 +4,23 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import pe.upc.petcarebackend.iam.domain.model.entities.Role;
 import pe.upc.petcarebackend.shared.domain.model.aggregates.AuditableAbstractAggregateRoot;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 @Entity
 public class User extends AuditableAbstractAggregateRoot<User> {
+
+
+    public LocalDateTime updatedAt;
+    public LocalDateTime createdAt;
 
     @Getter
     @NotBlank
@@ -31,7 +39,11 @@ public class User extends AuditableAbstractAggregateRoot<User> {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
-    public User() { this.roles = new HashSet<>();}
+    public User() {
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+        this.roles = new HashSet<>();
+    }
 
     public User(String username, String password) {
         this();
